@@ -126,17 +126,23 @@ public class LiquidAlt : MonoBehaviour
             // only lerp if not paused/normal update
             if (deltaTime != 0)
             {
+                //this lerps from 0 at start to worldPos - lowest point over delta time, to give a small adjustment based
+                //off the current cutoff in world space relative to the total height of the mesh
+                //it only edits the Y axis right now, consider making a float?
                 comp = Vector3.Lerp(comp, (worldPos - new Vector3(0, GetLowestPoint(), 0)), deltaTime * 10);
             }
             else
             {
+                //when there is no time, just return the lowest point, again, this is Y axis only
                 comp = (worldPos - new Vector3(0, GetLowestPoint(), 0));
             }
 
+            //pos = worldPos - currentPos - (modified fill amount off the Y axis). in this situation comp shape is basically only here to avoid 
             pos = worldPos - transform.position - new Vector3(0, fillAmount - (comp.y * CompensateShapeAmount), 0);
         }
         else
         {
+            //otherwise return just the fill amount
             pos = worldPos - transform.position - new Vector3(0, fillAmount, 0);
         }
         rend.sharedMaterial.SetVector("_FillAmount", pos);

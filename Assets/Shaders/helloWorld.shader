@@ -5,7 +5,7 @@ Shader"HelloWorldShader"
     // Parameters passed in through Unity
     Properties {
         _Color ("Color", Color ) = (1, 1, 1, 1)
-        [MainTextire] _BaseMap ("BaseMap", 2D) = "white" {}
+        [MainTexture] _BaseMap ("BaseMap", 2D) = "white" {}
         _Smoothness("Smoothness", Float) = 0
         }
 
@@ -60,11 +60,9 @@ struct v2f
 {
     // The positions in this struct must have the SV_POSITION semantic.
     //it's clip space so there's no depth
-    half4 posHClip : SV_POSITION;
-    
-    float2 uv : TEXCOORD1;
-    half3 normal : TEXCOORD0;
-    
+    half4 posHClip : SV_POSITION; 
+    float2 uv : TEXCOORD0;
+    half3 normal : TEXCOORD1;
     half3 posWSpace : TEXCOORD2;
 };
 
