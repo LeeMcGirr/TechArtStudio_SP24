@@ -6,6 +6,15 @@ Shader "Unlit/Liquid"
         _MainTex ("Texture", 2D) = "white" {}
         _TopCol ("Top Color", Color) = (1,1,1,1)
         _Alpha ("Transparency", Float) = 1
+        [HDR]_FoamColor ("Foam Line Color", Color) = (1,1,1,1)
+        _Line ("Foam Line Width", Range(0,0.1)) = 0.0    
+        _LineSmooth ("Foam Line Smoothness", Range(0,0.1)) = 0.0    
+        [Header(Rim)]
+        [HDR]_RimColor ("Rim Color", Color) = (1,1,1,1)
+        _RimPower ("Rim Power", Range(0,10)) = 0.0
+        [Header(Sine)]
+        _Freq ("Frequency", Range(0,15)) = 8
+        _Amplitude ("Amplitude", Range(0,0.5)) = 0.15
     }
     SubShader
     {
@@ -30,7 +39,8 @@ Shader "Unlit/Liquid"
             sampler2D _MainTex;
             float4 _MainTex_ST;
             float4 _Color;
-            float4 _TopCol;
+            float4 _TopCol, _RimColor, _FoamColor;
+            float _Line, _RimPower, _LineSmooth;
             float3 _FillAmount;
             float _WobbleX, _WobbleZ;
             float _Freq, _Amplitude;
@@ -97,6 +107,9 @@ Shader "Unlit/Liquid"
                 OUT.posHClip = TransformObjectToHClip(IN.posLocal);
                 OUT.uv = TRANSFORM_TEX(IN.uv, _MainTex);
                 OUT.fogCoord = ComputeFogFactor(OUT.posHClip.z);
+                OUT.viewDir = normalize(GetWorldSpaceViewDir(IN.posLocal));
+                OUT.worldNormal = mul((float4x4) unity_ObjectToWorld, IN.normal);
+                OUT.normal = IN.normal;
     
     
                 //pass out the fill line for our liquid
@@ -105,23 +118,43 @@ Shader "Unlit/Liquid"
 
             half4 frag (v2f IN, float facing : VFACE) : SV_Target
             {
+                // rim light via fresnel function            
+                float fresnel = pow(1 - saturate(dot(IN.worldNormal, IN.viewDir)), _RimPower);
+                float4 RimResult = fresnel * _RimColor;
+                RimResult *= _RimColor; 
     
-                float myFillPos = IN.fillPos.y;    
+                //add a sine wave wobble
+                float wobbleIntensity = abs(_WobbleX) + abs(_WobbleZ);
+                float wobble = sin((IN.fillPos.x * _Freq) + (IN.fillPos.z * _Freq) + (_Time.y)) * (_Amplitude * wobbleIntensity);
+    
+                float myFillPos = IN.fillPos.y + wobble;    
                 
     
                 // This section covers the base color/texture
                 half4 col = tex2D(_MainTex, IN.uv) * _Color;    
                 col = float4(MixFog(col, IN.fogCoord), _Alpha*col.w);
     
+                // foam edge
+                float cutoffTop = step(myFillPos, 0.5);
+                float foam = cutoffTop * smoothstep(0.5 - _Line - _LineSmooth, 0.5 - _Line, myFillPos);
+                half4 foamColored = foam * _FoamColor;
+    
+                //rest of the liquid
+                float noFoam = cutoffTop - foam;
+                float4 noFoamCol = noFoam * col;
+    
+                col = noFoamCol + foam;       
+                col.rgb += RimResult;
+    
                 //this section defines the color of the top
                 half4 topCol = float4(_TopCol.xyz, _Alpha*_TopCol.w);
     
                 //set a cutoff value - step returns 1 if .5 is > or equal to fill Pos, otherwise returns zero
-                float cutoffTop = step(myFillPos, 0.5);            
+                //float cutoffTop = step(myFillPos, 0.5);            
                 float4 cutoffCol = facing > 0 ? cutoffTop * col : cutoffTop * topCol;
     
                 //clip discards values of zero, in this case, anything above the waterline
-                clip(cutoffTop);
+                clip(noFoam + foam - 0.01);
                 return cutoffCol;
             }
 

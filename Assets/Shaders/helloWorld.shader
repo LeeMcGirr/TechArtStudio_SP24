@@ -115,5 +115,64 @@ half4 frag(v2f IN) : SV_Target
 }
             ENDHLSL
         }
+       // shadow caster rendering pass, implemented manually
+        // using macros from UnityCG.cginc
+  /*      Pass
+        {
+            Name "ShadowCaster"
+            Tags {"LightMode"="ShadowCaster"}
+
+            Cull Back;
+
+            HLSLPROGRAM
+            #pragma vertex shadowVert
+            #pragma fragment shadowFrag
+            #pragma shader_feature_ALPHATEST_ON
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/Shaders/LitInput.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShadowCasterPass.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+
+            CBUFFER_START(UnityPerMaterial)             
+            half4 _TintColor;
+            sampler2D _MainTex;
+            float4 _MainTex_ST;
+            float _Alpha;
+            CBUFFER_END
+
+struct appData
+{
+    float4 vertex : POSITION;
+    float4 normal : NORMAL;
+};
+
+struct v2f
+{
+    float4 posHClip : SV_POSITION;
+ 
+};
+
+v2f vert(appData IN)
+{
+    v2f OUT;
+    
+    float3 posWorldSpace = TransformObjectToWorld(IN.vertex.xyz);
+    float3 normalWorldSpace = TransformObjectToWorldNormal(IN.normal.xyz);
+    float4 posHClip = TransformWorldToHClip(ApplyShadowBias(posWorldSpace, normalWorldSpace, _MainLightPosition.xyz));
+    OUT.posHClip = posHClip;
+    
+
+    return OUT;
+}
+
+float4 frag(v2f IN) : SV_Target
+{
+    float4 col = tex2D(_MainTex, IN.uv);
+    clip(col.a - _Alpha);
+    return col;
+
+}
+            ENDHLSL
+        }*/
     }
 }
