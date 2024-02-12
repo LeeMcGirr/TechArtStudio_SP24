@@ -24,6 +24,7 @@ HLSLPROGRAM
 
 #define _SPECULAR_COLOR
             #pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE
+            #pragma multi_compile_fragment _ _SHADOWS_SOFT
             // This line defines the name of the vertex shader. 
             #pragma vertex vert
             // This line defines the name of the fragment shader. 
@@ -115,30 +116,20 @@ half4 frag(v2f IN) : SV_Target
 }
             ENDHLSL
         }
+
+
        // shadow caster rendering pass, implemented manually
         // using macros from UnityCG.cginc
-  /*      Pass
-        {
-            Name "ShadowCaster"
-            Tags {"LightMode"="ShadowCaster"}
-
-            Cull Back;
+        Pass {
+            // The shadow caster pass, which draws to shadow maps
+            Name"ShadowCaster"
+            Tags {"LightMode" = "ShadowCaster"}
+            ColorMask 0 // No color output, only depth
 
             HLSLPROGRAM
-            #pragma vertex shadowVert
-            #pragma fragment shadowFrag
-            #pragma shader_feature_ALPHATEST_ON
+            #pragma vertex vert
+            #pragma fragment frag
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
-            #include "Packages/com.unity.render-pipelines.universal/Shaders/LitInput.hlsl"
-            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShadowCasterPass.hlsl"
-            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-
-            CBUFFER_START(UnityPerMaterial)             
-            half4 _TintColor;
-            sampler2D _MainTex;
-            float4 _MainTex_ST;
-            float _Alpha;
-            CBUFFER_END
 
 struct appData
 {
@@ -152,27 +143,38 @@ struct v2f
  
 };
 
+float3 _LightDirection; //Unity sets this based off the light rendering this shadow pass
+
+float4 GetShadowCasterPositionHClip(float3 positionWS, float3 normalWS)
+{
+    float3 lightDirectionWS = _LightDirection;
+    float4 positionCS = TransformWorldToHClip(ApplyShadowBias(positionWS, normalWS, lightDirectionWS));
+    
+    #if UNITY_REVERSED_Z
+	positionCS.z = min(positionCS.z, UNITY_NEAR_CLIP_VALUE);
+    #else
+    positionCS.z = max(positionCS.z, UNITY_NEAR_CLIP_VALUE);
+    #endif
+    return positionCS;
+}
+
 v2f vert(appData IN)
 {
     v2f OUT;
     
-    float3 posWorldSpace = TransformObjectToWorld(IN.vertex.xyz);
-    float3 normalWorldSpace = TransformObjectToWorldNormal(IN.normal.xyz);
-    float4 posHClip = TransformWorldToHClip(ApplyShadowBias(posWorldSpace, normalWorldSpace, _MainLightPosition.xyz));
-    OUT.posHClip = posHClip;
-    
+    VertexPositionInputs posnInputs = GetVertexPositionInputs(IN.vertex); // Found in URP/ShaderLib/ShaderVariablesFunctions.hlsl
+    VertexNormalInputs normInputs = GetVertexNormalInputs(IN.normal); // Found in URP/ShaderLib/ShaderVariablesFunctions.hlsl
 
+    OUT.posHClip = GetShadowCasterPositionHClip(posnInputs.positionWS, normInputs.normalWS);
     return OUT;
 }
 
 float4 frag(v2f IN) : SV_Target
 {
-    float4 col = tex2D(_MainTex, IN.uv);
-    clip(col.a - _Alpha);
-    return col;
+    return 0;
 
 }
             ENDHLSL
-        }*/
+        }
     }
 }
