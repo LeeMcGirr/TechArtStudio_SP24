@@ -1,0 +1,98 @@
+HoverCraft System:
+
+1)	HoverCraft - the main script. controlls the full hovercraft movement:
+	
+		- input type: what input should the script use? :
+			- axes - use axes;
+			- other - asighn input from other script by function "parseInput" ;
+				center: center of the veicle;
+
+
+		- invertInputWhenGoingBack - if should, just like a car have inverted input when going backwards
+
+		- liftTypeSpace: lift forces add space:
+			- world - Vector3.up;
+			- local - transform.up;
+		
+		- (x/z)thrustCorrectionSpeed - speed of making the x/z trust mach the input;
+		- center - center of the vehicle, should be between all of hoverPoints;
+
+		- forwardVector - forward of the vehicle;
+		- forwardSpeed - speed of vehicle that is applyied forward when going forward;
+		- backwardsSpeed - speed of vehicle that is applyied backwards when going backwards; 
+		- maxSpeed - the maxinum velocity.magditud for the hoovercraft to apply forces forward/backwards;
+		- forwardForceMode - forceMode of forces forward/backwards;
+		
+		- angularSpeed - torque applyied to rotate the veicle;
+		- maxAngularSpeed - the maxinum angularVelocity.magditud for the hoovercraft to apply Torque left/right;
+		- angularForceMode - forceMode of Torques left/right;
+		
+		- groundDetectionDistance - distance that the vehicle will detect the ground from groundDetector;
+		- groundDetector - a point from which the ground will be detected;
+		- groundLayer - the layer that the ground  is on;
+		- hooverHeight - desired height for the hoovercraft to be on (will be a little lover);
+		
+		- maxNormalAngle - the maximum normal diffrence accepable to float with out moving sideways;
+        - normalFixForce - force used to push veicle of hill with slope over maxNormal angle;
+		- normalFixForceMode - ForceMode used for normalFixForce;
+		
+		- additionalGroundedForceUp - the force that is applyied for the vehicle when it is grounded up;
+		- additionalUnGroundedForceUp - the force that is applyied for the vehicle when it is not grounded up;
+		
+		- jumpForce - the force of jump;
+		- jumpForceMode - forceMode of the jump;
+		
+		HoverPoints:
+			- point - position of the hoverpoint;
+			- liftFoce - force used to lift the vehicle on this point;
+			- liftForceMode - the forceMode of force used to lift the vehicle;
+			- whenToLevel - the conditions for the vehicle to start leveling (proces of making v3 up to vehicle up);
+			- levelingForce - the force of leveling;
+			- upLevelingOffset - the ofset from the "point" up, for better leveling;
+			- LevelingHeightDiffrenceTolerance - the tolerance of diffrent height when leveling;
+			- levelingForceMode - forceMode used for leveling;
+
+2) camera - simple script controlling camera:
+	- target - the target of the camera;
+	- Speed - the speed that the camera will follow the camPos with;
+	- cam - camera transform;
+	- camPos - desired position of the camera;
+
+3) hoverCraftTilt - script that allows hovercrat to tilt:
+	- tiltUpType - specifies what will be counted as Up in tilting;
+	- inputType - if the script should get the player input, or the thrust of hovercraft to tilt;
+	- model - the model itself, not the hole hovercraft, make sure that the hoverPoints are not children of it;
+	- hoverCraftScript - the hoverCraft component of this hovercraft;
+	- maxTilt - max tilt angle of the veicle;
+	- tiltSpeed - speed of tilting the veicle;
+	- invertTiltWhenGoingBack - if should invert tilt when going back
+
+4) gridSpawner - system used for spawning a grid:
+	- hoverCraftScript - reference to hoverCraft component. if filled in, will automatically assighn created gridPoints as hoverPoints;
+	- pointObj - if not null will spawn this object as each gridPoint;
+	- shape - shape of grid;
+	- xSpawn/zSpawn - spawn iterations on axis (ammount of grid points spawned on axis);
+	- xLen/zLen - distance between grid points on axis;
+	- radius - radius of each circle layer. going to be multiplied by layer, to make outer circeles further from center;
+	- up - up offset on each layer, from layer before;
+	- borderSpawn - spawned gridPoints on each layer;
+	- layersCount - ammount of circles (layers) taht on there are spawned grid points;
+
+5) HCTiresSimulator - system simulating tires bounde to a shape:
+	- hoverCraftScript - the hoverCraft component of this hovercraft;
+	- forwardAxis - forward of hoverCraft. this represents up of it too, so point up of it, to up of hovercraft;
+	- detectionHeight - max distance of tire to detectPoint;
+	- tireHeigthOffset - offset of tires from groun (their radius);
+	- turnAngle - turn angle of turning tires;
+	- turnSpeed - the speed of turning of turning tires;
+	- groundLayer - ground layer;
+	- upType - specifies what should be considered as up for a tire:
+		- up - V3.up;
+		- normal - normal of detected surface;
+	- turningTires - lis of tires that will turn;
+	- standingTires - list of tires that just adapt to terrain;
+	- tireSettings - settings of individual tire:
+		- detectPoint - point of with tire will be palced on end of ray shoot down from;
+		- tire - tire itself;
+
+
