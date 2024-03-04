@@ -4,7 +4,10 @@ Shader "Unlit/depthTex"
 // on a mesh to visualize the positions.
 {
     Properties
-    { }
+    { 
+        _Scale ("Scale", Int) = 10
+
+    }
 
     // The SubShader block containing the Shader code.
     SubShader
@@ -23,6 +26,10 @@ Shader "Unlit/depthTex"
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DeclareDepthTexture.hlsl"
+
+CBUFFER_START(UnityPerMaterial)
+int _Scale;
+CBUFFER_END
 
 
 struct appdata
@@ -65,9 +72,9 @@ half4 frag(v2f IN) : SV_Target
 
                 // The following part creates the checkerboard effect.
                 // Scale is the inverse size of the squares.
-                uint scale = 10;
+                //uint scale = 10;
                 // Scale, mirror and snap the coordinates.
-                uint3 worldIntPos = uint3(abs(worldPos.xyz * scale));
+                uint3 worldIntPos = uint3(abs(worldPos.xyz * _Scale));
                 // Divide the surface into squares. Calculate the color ID value.
                 bool white = ((worldIntPos.x) & 1) ^ (worldIntPos.y & 1) ^ (worldIntPos.z & 1);
                 // Color the square based on the ID value (black or white).

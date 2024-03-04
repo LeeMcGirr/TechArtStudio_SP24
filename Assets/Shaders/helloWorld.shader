@@ -176,5 +176,21 @@ float4 frag(v2f IN) : SV_Target
 }
             ENDHLSL
         }
+
+        Pass{
+        Name"Depth"
+        Tags {"LightMode"="DepthNormalsOnly"}
+
+        HLSLPROGRAM
+        #pragma vertex vert
+        #pragma fragment frag
+        
+float frag : SV_Target
+{
+        return 1;
+}
+        ENDHLSL
+
+}
     }
 }
