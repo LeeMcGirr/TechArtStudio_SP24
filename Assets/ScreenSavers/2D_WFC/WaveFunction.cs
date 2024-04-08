@@ -86,6 +86,8 @@ public class WaveFunction : MonoBehaviour
         Tile foundTile = cellToCollapse.tileOptions[0];
         Instantiate(foundTile, cellToCollapse.transform.position, Quaternion.identity);
 
+        //in here we're gonna update the list with the validated cell and update any
+        //tile options that have changed
         UpdateGeneration();
     }
 
@@ -108,7 +110,7 @@ public class WaveFunction : MonoBehaviour
                     List<Tile> options = new List<Tile>(); //list of tileOptions for our current selected index
                     foreach (Tile t in tileObjects)
                     {
-                        options.Add(t);
+                        options.Add(t); //start by just adding all of them before filtering out invalid results
                     }
 
                     //next we cycle through all 4 neighbors and remove options if necessary
@@ -203,7 +205,9 @@ public class WaveFunction : MonoBehaviour
 
     }
 
-    //utility to check for valid tile options in a given cell
+
+    //optionList here is the previous valid targets before entropy for tiles at a given cell
+    //validOptions we'll have to calculate in a Generation() above and pass into here
     void CheckValidity(List<Tile> optionList, List<Tile> validOption)
     {
         //count down so we remove from the bottom of the list first
