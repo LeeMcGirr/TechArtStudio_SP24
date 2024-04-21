@@ -18,7 +18,7 @@ Shader"HelloWorldShader"
 
         Pass
         {
-            Tags {"LightMode"="UniversalForward"}
+            Tags {"LightMode"="RenderObjectsPass"}
             // The HLSL code block. Unity SRP uses the HLSL language.
 HLSLPROGRAM
 
