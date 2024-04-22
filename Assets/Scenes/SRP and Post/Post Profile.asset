@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 221518ef91623a7438a71fef23660601, type: 3}
   m_Name: WhiteBalance
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   temperature:
     m_OverrideState: 1
-    m_Value: -21.6
+    m_Value: 53.7
   tint:
     m_OverrideState: 1
-    m_Value: -10
+    m_Value: -22.2
 --- !u!114 &-4054224293507477369
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -31,16 +31,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5485954d14dfb9a4c8ead8edb0ded5b1, type: 3}
   m_Name: LiftGammaGain
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   lift:
     m_OverrideState: 1
-    m_Value: {x: 0.7005749, y: 0.642417, z: 1, w: -0.03257957}
+    m_Value: {x: 0.8120746, y: 0.72210777, z: 1, w: -0.015772752}
   gamma:
-    m_OverrideState: 1
-    m_Value: {x: 0.9926386, y: 0.989308, z: 1, w: 0.10189901}
+    m_OverrideState: 0
+    m_Value: {x: 0.9926386, y: 0.989308, z: 1, w: -0.09463724}
   gain:
-    m_OverrideState: 1
-    m_Value: {x: 1, y: 0.9317462, z: 0.64197284, w: 0.3659101}
+    m_OverrideState: 0
+    m_Value: {x: 0.96772975, y: 1, z: 0.6598984, w: 0.47318617}
 --- !u!114 &-4013464528634720890
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -75,8 +75,8 @@ MonoBehaviour:
   - {fileID: -5779592456881431470}
   - {fileID: -4013464528634720890}
   - {fileID: 1774467210247197616}
-  - {fileID: 8668850576500596497}
   - {fileID: 9214963163816346428}
+  - {fileID: 7584765999634597309}
 --- !u!114 &1774467210247197616
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -89,15 +89,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e021b4c809a781e468c2988c016ebbea, type: 3}
   m_Name: ColorLookup
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   texture:
     m_OverrideState: 1
-    m_Value: {fileID: 2800000, guid: 464a70971f207394596d2e4c14c3a8f6, type: 3}
+    m_Value: {fileID: 2800000, guid: 1c51f1e413b3b28469d0ecaa85c3a957, type: 3}
     dimension: 1
   contribution:
     m_OverrideState: 1
-    m_Value: 0.886
---- !u!114 &8668850576500596497
+    m_Value: 0.466
+--- !u!114 &7584765999634597309
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -175,7 +175,7 @@ MonoBehaviour:
   green:
     m_OverrideState: 0
     m_Value:
-      <length>k__BackingField: 4
+      <length>k__BackingField: 2
       m_Loop: 0
       m_ZeroValue: 0
       m_Range: 1
@@ -185,26 +185,8 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: 0.28816697
-          outSlope: 0.28816697
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        - serializedVersion: 3
-          time: 0.35762483
-          value: 0.25
           inSlope: 1
           outSlope: 1
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        - serializedVersion: 3
-          time: 0.82861
-          value: 0.83055556
-          inSlope: 1.2993383
-          outSlope: 1.2993383
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
@@ -263,8 +245,8 @@ MonoBehaviour:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
-          time: 0.12145749
-          value: 0.5
+          time: 0.10818934
+          value: 0.5181674
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -272,8 +254,8 @@ MonoBehaviour:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.35762483
-          value: 0.5555556
+          time: 0.27272728
+          value: 0.31911522
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -281,8 +263,8 @@ MonoBehaviour:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.62753034
-          value: 0.5
+          time: 0.5477085
+          value: 0.52290666
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -303,7 +285,7 @@ MonoBehaviour:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
-          time: 0.1754386
+          time: 0.05634861
           value: 0.5
           inSlope: 0
           outSlope: 0
@@ -312,8 +294,8 @@ MonoBehaviour:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.31983805
-          value: 0.37222224
+          time: 0.26821938
+          value: 0.45181668
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -321,7 +303,7 @@ MonoBehaviour:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.48852903
+          time: 0.53643876
           value: 0.5
           inSlope: 0
           outSlope: 0
@@ -379,7 +361,7 @@ MonoBehaviour:
     m_Value: {x: 1, y: 1, z: 1, w: -0.1204261}
   highlights:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: 0.03242242}
+    m_Value: {x: 1, y: 1, z: 1, w: 0.11128678}
   shadowsStart:
     m_OverrideState: 1
     m_Value: 0
@@ -404,25 +386,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b2db86121404754db890f4c8dfe81b2, type: 3}
   m_Name: Bloom
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   skipIterations:
     m_OverrideState: 0
     m_Value: 1
   threshold:
     m_OverrideState: 1
-    m_Value: 0.8
+    m_Value: 0.99
   intensity:
     m_OverrideState: 1
-    m_Value: 10
+    m_Value: 4
   scatter:
     m_OverrideState: 1
-    m_Value: 0.624
+    m_Value: 0.185
   clamp:
     m_OverrideState: 0
     m_Value: 65472
   tint:
     m_OverrideState: 1
-    m_Value: {r: 0.9254902, g: 0.45573142, b: 0.19607843, a: 1}
+    m_Value: {r: 0.74162596, g: 0.9254902, b: 0.19607843, a: 1}
   highQualityFiltering:
     m_OverrideState: 0
     m_Value: 0
