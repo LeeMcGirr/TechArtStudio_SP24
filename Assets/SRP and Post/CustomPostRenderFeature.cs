@@ -8,7 +8,10 @@ public class CustomPostRenderFeature : ScriptableRendererFeature
 {
 
     public Shader myBloomShader;
-    public Material myBloomMat;
+    public float scatter;
+    public int clamp;
+    public float threshold;
+    Material myBloomMat;
     CustomPostPass myPass;
 
     public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
@@ -33,6 +36,9 @@ public class CustomPostRenderFeature : ScriptableRendererFeature
     {
         myBloomMat = CoreUtils.CreateEngineMaterial(myBloomShader);
         myPass = new CustomPostPass(myBloomMat);
+        myPass.clamp = clamp;
+        myPass.threshold = threshold;
+        myPass.scatter = scatter;  
     }
 
     protected override void Dispose(bool disposing)

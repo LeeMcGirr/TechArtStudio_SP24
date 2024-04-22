@@ -25,7 +25,9 @@ public class CustomPostPass : ScriptableRenderPass
     RTHandle myCamDepthTarget;
 
 
-
+    public int clamp;
+    public float threshold;
+    public float scatter;
 
 
     public CustomPostPass(Material bloomMat)
@@ -109,14 +111,14 @@ public class CustomPostPass : ScriptableRenderPass
         int mipCount = Mathf.Clamp(iterations, 1, myBloomEffect.maxIterations.value);
 
         // Pre-filtering parameters
-        float clamp = myBloomEffect.clamp.value;
-        float threshold = Mathf.GammaToLinearSpace(myBloomEffect.threshold.value);
+        float newClamp = clamp;
+        float newThreshold = Mathf.GammaToLinearSpace(threshold);
         float thresholdKnee = threshold * 0.5f; // Hardcoded soft knee
 
-        float scatter = Mathf.Lerp(0.05f, 0.95f, myBloomEffect.scatter.value);
+        float newScatter = Mathf.Lerp(0.05f, 0.95f, scatter);
         var bloomMaterial = myBloomMat;
 
-        bloomMaterial.SetVector("_Params", new Vector4(scatter, clamp, threshold, thresholdKnee));
+        bloomMaterial.SetVector("_Params", new Vector4(newScatter, newClamp, newThreshold, thresholdKnee));
 
         //Prefilter
         var desc = GetCompatibleDescriptor(tw, th, hdrFormat);

@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Active: 0
   myBloomShader: {fileID: 4800000, guid: 5f1864addb451f54bae8c86d230f736e, type: 3}
+  scatter: 0
+  clamp: 0
+  threshold: 0
 --- !u!114 &-1878332245247344467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,8 +114,8 @@ MonoBehaviour:
   m_RendererFeatures:
   - {fileID: -1878332245247344467}
   - {fileID: -97100459130968924}
-  - {fileID: -3699391140542244179}
-  m_RendererFeatureMap: adc0de57c6d2eee5a4a4f899a507a7fead9ac09e5b1fa9cc
+  - {fileID: 8502200915391762313}
+  m_RendererFeatureMap: adc0de57c6d2eee5a4a4f899a507a7fe894fed9aafe2fd75
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -155,3 +158,20 @@ MonoBehaviour:
   m_CopyDepthMode: 0
   m_AccurateGbufferNormals: 0
   m_IntermediateTextureMode: 1
+--- !u!114 &8502200915391762313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df167ea96e59843448faac0f32a81ade, type: 3}
+  m_Name: CustomPostRenderFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  myBloomShader: {fileID: 4800000, guid: 5f1864addb451f54bae8c86d230f736e, type: 3}
+  scatter: 0.6
+  clamp: 1
+  threshold: 0.4
