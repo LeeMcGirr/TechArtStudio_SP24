@@ -8,13 +8,15 @@ public class CustomPostRenderFeature : ScriptableRendererFeature
 {
 
     public Shader myBloomShader;
+    public Material myBloomMat;
     CustomPostPass myPass;
-    Material myBloomMat;
 
     public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
     {
-        //add passes to queue
-        renderer.EnqueuePass(myPass);
+        if (renderingData.cameraData.cameraType == CameraType.Game)
+        {
+            renderer.EnqueuePass(myPass);
+        }
     }
 
     public override void SetupRenderPasses(ScriptableRenderer renderer, in RenderingData renderingData)
