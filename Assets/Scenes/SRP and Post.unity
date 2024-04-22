@@ -10323,8 +10323,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myPlayer: {fileID: 1205982751}
-  topSpeed: 10
-  mVolumeProfile: {fileID: 11400000, guid: 3b5fbcc626f594a449df9d21acad9dae, type: 2}
+  topSpeed: 3
+  myVol: {fileID: 1656484387}
+  myVolumeProfile: {fileID: 0}
   myAbb: {fileID: 0}
 --- !u!1001 &1212950423
 PrefabInstance:
