@@ -172,6 +172,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Active: 1
   myBloomShader: {fileID: 4800000, guid: 5f1864addb451f54bae8c86d230f736e, type: 3}
-  scatter: 0.6
-  clamp: 1
+  scatter: 4
+  clamp: 5000
   threshold: 0.4
