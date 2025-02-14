@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Triplanar
-  m_Shader: {fileID: -6465566751694194690, guid: d0f8fbca6a4da114eab2f62de45c6e06,
+  m_Shader: {fileID: -6465566751694194690, guid: 731dc884699e3f0429350ac01e7298fc,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -85,11 +85,23 @@ Material:
         m_Texture: {fileID: 2800000, guid: 17c9fffbd702dee44ad8615838026c56, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _xText:
+        m_Texture: {fileID: 2800000, guid: 11559de7082f4da4188a28c509889398, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _yTex:
         m_Texture: {fileID: 2800000, guid: 11559de7082f4da4188a28c509889398, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _yText:
+        m_Texture: {fileID: 2800000, guid: 17c9fffbd702dee44ad8615838026c56, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _zTex:
+        m_Texture: {fileID: 2800000, guid: 9f8c06939640a6243a1ef4fbdae4be30, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _zText:
         m_Texture: {fileID: 2800000, guid: 9f8c06939640a6243a1ef4fbdae4be30, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -109,6 +121,7 @@ Material:
     m_Floats:
     - _AlphaClip: 0
     - _AlphaToMask: 0
+    - _BaseBlend: 64
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
@@ -138,8 +151,8 @@ Material:
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
-    - _baseBlend: 60
-    - _rounded: 1
+    - _baseBlend: 3
+    - _rounded: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
