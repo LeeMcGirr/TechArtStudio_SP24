@@ -115,7 +115,8 @@ MonoBehaviour:
   - {fileID: -1878332245247344467}
   - {fileID: -97100459130968924}
   - {fileID: 8502200915391762313}
-  m_RendererFeatureMap: adc0de57c6d2eee5a4a4f899a507a7fe894fed9aafe2fd75
+  - {fileID: 2190320419591399881}
+  m_RendererFeatureMap: adc0de57c6d2eee5a4a4f899a507a7fe894fed9aafe2fd75c9a9071ad194651e
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -158,6 +159,26 @@ MonoBehaviour:
   m_CopyDepthMode: 0
   m_AccurateGbufferNormals: 0
   m_IntermediateTextureMode: 1
+--- !u!114 &2190320419591399881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d613f08f173d4dd895bb07b3230baa9, type: 3}
+  m_Name: FullScreenPassRendererFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  injectionPoint: 600
+  fetchColorBuffer: 1
+  requirements: 0
+  passMaterial: {fileID: 2100000, guid: 7a820d587320bd543ade2240f669eb82, type: 2}
+  passIndex: 0
+  bindDepthStencilAttachment: 0
+  m_Version: 1
 --- !u!114 &8502200915391762313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,7 +189,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df167ea96e59843448faac0f32a81ade, type: 3}
-  m_Name: CustomPostRenderFeature
+  m_Name: MyBloom
   m_EditorClassIdentifier: 
   m_Active: 1
   myBloomShader: {fileID: 4800000, guid: 5f1864addb451f54bae8c86d230f736e, type: 3}
